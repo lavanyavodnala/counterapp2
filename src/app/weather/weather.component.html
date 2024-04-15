@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="text-center">Search for Weather:</h3>
+            <form [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+              <div class="form-group">
+                <!-- <input
+                  class="form-control"
+                  type="text"
+                  id="weatherLocation"
+                  aria-describedby="weatherLocation"
+                  placeholder="Please input a Location"
+                  formControlName="location"
+                /> -->
+                <select class="form-select"  aria-label="select example" formControlName="location" (change)="changefun($event)">
+                    <option selected>select location</option>
+                    <ng-container *ngFor="let l of locationsarray">
+                    <option value="{{l.city}}">{{l.city}}</option>
+                </ng-container>
+                  </select>
+                  <div class="text-danger" *ngIf="showerror" >Please select the location</div>
+                  
+                  
+               </div>
+               <div class="text-center">
+                <button type="submit" class="btn btn-success btn-md mt-4">Search for the weather</button>
+            </div>
+             </form> 
+          </div>
+          <div class="col-md-6">
+            <h3 class="text-center my-4">Weather Details:</h3>
+            <ng-container *ngFor="let w of weatherData">
+            <p class="text-center"><b>Current weather conditions:</b>{{w.weather_description}}</p>
+            <p class="text-center"><b>Temperature :</b>{{w.temperature}}</p>
+            <p class="text-center"><b>Wind speed:</b>{{w.wind_speed}}</p>
+            <p class="text-center"><b>Location Searched:</b>{{w.city}}</p>
+            <p class="text-center"><b>Country:</b>{{w.country}}</p>
+        </ng-container>
+          </div>
+    </div>
+   
+  </div>
